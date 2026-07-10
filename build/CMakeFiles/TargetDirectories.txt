@@ -1,0 +1,7 @@
+/home/pavle/Desktop/MAS/THE END/MASTER/build/CMakeFiles/MASTER.dir
+/home/pavle/Desktop/MAS/THE END/MASTER/build/CMakeFiles/copy_resource.dir
+/home/pavle/Desktop/MAS/THE END/MASTER/build/CMakeFiles/stb_image.dir
+/home/pavle/Desktop/MAS/THE END/MASTER/build/CMakeFiles/edit_cache.dir
+/home/pavle/Desktop/MAS/THE END/MASTER/build/CMakeFiles/rebuild_cache.dir
+/home/pavle/Desktop/MAS/THE END/MASTER/build/src/CMakeFiles/edit_cache.dir
+/home/pavle/Desktop/MAS/THE END/MASTER/build/src/CMakeFiles/rebuild_cache.dir

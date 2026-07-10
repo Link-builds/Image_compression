@@ -1,0 +1,15 @@
+# ninja log v5
+1	30	0	CMakeFiles/copy_resource	78a55bf5eecb37b6
+1	30	0	/home/pavle/Desktop/MAS/THE END/MASTER/build/CMakeFiles/copy_resource	78a55bf5eecb37b6
+31	829	1783679014245837547	CMakeFiles/MASTER.dir/src/main.cpp.o	12787a62c10703ee
+31	440	1783679013857832684	CMakeFiles/MASTER.dir/src/CImage.cpp.o	e232894ea9a1ccda
+1275	1370	1783690809208409551	MASTER	4ca8695f409fd69
+33	593	1783680676829417199	CMakeFiles/MASTER.dir/src/CApp.cpp.o	eeead27cd27815a2
+32	1274	1783690809115408142	CMakeFiles/MASTER.dir/src/utils.cpp.o	465a0b2f9f53a1c1
+2	2506	1783679015923858581	CMakeFiles/stb_image.dir/vendor/stb_image/stb_image_write.c.o	1ef3c0d1ecea66bd
+1	3056	1783679016473865477	CMakeFiles/stb_image.dir/vendor/stb_image/stb_image.c.o	dc5db35cd2760978
+3056	3157	1783679016567866655	libstb_image.a	347874e77eaf2363
+2	30	0	CMakeFiles/copy_resource	78a55bf5eecb37b6
+2	30	0	/home/pavle/Desktop/MAS/THE END/MASTER/build/CMakeFiles/copy_resource	78a55bf5eecb37b6
+2	32	0	CMakeFiles/copy_resource	78a55bf5eecb37b6
+2	32	0	/home/pavle/Desktop/MAS/THE END/MASTER/build/CMakeFiles/copy_resource	78a55bf5eecb37b6
