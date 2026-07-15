@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <cmath>
+#include <numeric>
 
 #include "CImage.h"
 
@@ -27,7 +28,7 @@ namespace utils
 
     void prepare_dataset(const std::string &srcDir, const std::string &destDir);
 
-    double get_median(std::vector<double> &values);
+    double get_median(std::vector<double> values);
     double get_mean(const std::vector<double> &values);
     double get_variance(const std::vector<double> &values, double mean);
     double get_covariance(const std::vector<double> &xValues, const std::vector<double> &yValues, double xMean, double yMean);

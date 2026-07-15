@@ -29,36 +29,48 @@ void utils::prepare_dataset(const std::string &srcDir, const std::string &destDi
     }
 }
 
-double utils::get_median(std::vector<double> &values)
+double utils::get_median(std::vector<double> values)
 {
     if (values.empty()) return 0.0;
 
-    std::sort(values.begin(), values.end());
     size_t n = values.size();
+    size_t mid = n/2;
 
     if (!(n % 2))
-        return (values[(n-1) / 2] + values[n/2]) / 2.0;
+    {
+        std::nth_element(values.begin(), values.begin() + mid, values.end());
+        double m1 = values[mid];
+
+        std::nth_element(values.begin(), values.begin() + mid - 1, values.end());
+        double m2 = values[mid - 1];
+
+        return (m1 + m2) / 2.0;
+    }
+
+    std::nth_element(values.begin(), values.begin() + mid, values.end());
 
     return values[n/2];
 }
 
 double utils::get_mean(const std::vector<double> &values)
 {
+    if (values.empty()) return 0.0;
+
     double sum = 0.0;
-    int n = values.size();
 
-    for (int i = 0; i < n; i++)
-        sum += values[i];
+    sum = std::accumulate(values.begin(), values.end(), 0.0);
 
-    return sum / n;
+    return sum / values.size();
 }
 
 double utils::get_variance(const std::vector<double> &values, double mean)
 {
-    double sumProd = 0.0;
-    int n = values.size();
+    if (values.empty()) return 0.0;
 
-    for (int i = 0; i < n; i++)
+    double sumProd = 0.0;
+    size_t n = values.size();
+
+    for (size_t i = 0; i < n; i++)
         sumProd += (values[i] - mean)*(values[i] - mean);
 
     return sumProd / n;
@@ -66,10 +78,12 @@ double utils::get_variance(const std::vector<double> &values, double mean)
 
 double utils::get_covariance(const std::vector<double> &xValues, const std::vector<double> &yValues, double xMean, double yMean)
 {
-    double sumProd = 0.0;
-    int n = xValues.size();
+    if (xValues.empty() || xValues.size() != yValues.size()) return 0.0;
 
-    for (int i = 0; i < n; i++)
+    double sumProd = 0.0;
+    size_t n = xValues.size();
+
+    for (size_t i = 0; i < n; i++)
         sumProd += (xValues[i] - xMean) * (yValues[i] - yMean);
 
     return sumProd / n;
