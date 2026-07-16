@@ -36,7 +36,7 @@ void Image::save_as(const std::string &outName, Format format, std::optional<int
             std::cout << "You chose to save as .jpg. Please provide a quality value [1-100]: ";
             std::cin >> q;
 
-            while( q < 1 || q > 100 )
+            while (q < 1 || q > 100)
             {
                 std::cout << "Provided value out of scope, must be [1-100]: ";
                 std::cin >> q;

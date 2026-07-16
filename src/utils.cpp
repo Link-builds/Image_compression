@@ -284,7 +284,7 @@ void utils::evaluate_metrics(const std::string &srcDir)
         outName = "output/PNG/" + i.path().stem().string();
         results.emplace_back(run_case(img, outName, Format::PNG, std::nullopt,".png", ogSize, "PNG"));
 
-        for (int quality : {1, 10, 30, 50, 70, 90})
+        for (int quality : {1, 10, 30, 50, 70, 90, 100})
         {
             outName = "output/JPG/" + i.path().stem().string() + "_q" + std::to_string(quality);
             results.emplace_back(run_case(img, outName, Format::JPG, quality,".jpg", ogSize, "JPG"));
