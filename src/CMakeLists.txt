@@ -6,6 +6,8 @@ list(
 		"${dir}/utils.cpp"
 		"${dir}/filters.cpp"
 		"${dir}/CHuffmanCanon.cpp"
+		"${dir}/CCustomEncoder.cpp"
+		"${dir}/CCustomDecoder.cpp"
 		"${dir}/CApp.cpp"
 		"${dir}/main.cpp"
 	)

@@ -8,12 +8,15 @@
 #include <string>
 #include <stdexcept>
 #include <optional>
+#include <cstdlib>
+#include <cstring>
 
 enum class Format
 {
     PNG,
     JPG,
-    BMP
+    BMP,
+    POL
 };
 
 class Image

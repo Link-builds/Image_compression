@@ -6,6 +6,8 @@
 #include <vector>
 #include <climits>
 
+using byte_t = unsigned char;
+
 namespace blockFilters
 {
     using filterFun = int (*)(int left, int up, int upLeft);
@@ -24,5 +26,11 @@ namespace blockFilters
 
     constexpr std::array<filterFun, 6> selection = {none, left, up, average, paeth, loco};
 
-    std::vector<int> select_filters(int width, int height, int channels ,const unsigned char *data ,int blockSize);
+    std::vector<int> select_filters(int width, int height, int channels, const byte_t *data ,int blockSize);
+
+    std::vector<byte_t> apply_filters(int width, int height, int channels, const byte_t *data,
+        int blockSize, const std::vector<int> &filterPerBlock);
+
+    std::vector<byte_t> remove_filters(int width, int height, int channels, const std::string &decoded,
+        int blockSize, const std::vector<int> &filterPerBlock);
 }

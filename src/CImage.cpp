@@ -1,10 +1,31 @@
 #include "CImage.h"
+#include "utils.h"
+#include "CCustomEncoder.h"
+#include "CCustomDecoder.h"
 
 Image::Image(const std::string &dataPath) : m_dataPath(dataPath)
 {
-    m_data = stbi_load(dataPath.c_str(), &m_width, &m_height, &m_numChannel, 0);
+    if (utils::has_extension(dataPath, ".pol"))
+    {
+        CustomDecoder dec(dataPath);
+        dec.decode_and_load();
 
-    if (!m_data) throw std::runtime_error("ERR: Failed to load image (" + m_dataPath + ')');
+        m_width = dec.width();
+        m_height = dec.height();
+        m_numChannel = dec.channels();
+
+        size_t byteCount = static_cast<size_t>(m_width) * m_height * m_numChannel;
+        m_data = static_cast<byte_t *>(std::malloc(byteCount));
+        if (m_data == nullptr) throw std::runtime_error("Failed to allocate memory for: Image::m_data");
+
+        std::memcpy(m_data, dec.data(), byteCount);
+    }
+    else
+    {
+        m_data = stbi_load(dataPath.c_str(), &m_width, &m_height, &m_numChannel, 0);
+
+        if (!m_data) throw std::runtime_error("ERR: Failed to load image (" + m_dataPath + ')');
+    }
 }
 
 Image::~Image()
@@ -48,5 +69,10 @@ void Image::save_as(const std::string &outName, Format format, std::optional<int
     else if (format == Format::BMP)
     {
         stbi_write_bmp((outName + ".bmp").c_str(), m_width, m_height, m_numChannel, m_data);
+    }
+    else if (format == Format::POL)
+    {
+        CustomEncoder enc(*this);
+        enc.encode_and_save(outName + ".pol");
     }
 }

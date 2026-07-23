@@ -44,4 +44,6 @@ namespace utils
 
     void evaluate_metrics(const std::string &srcDir);
     void generate_csv(const std::vector<EvalResult> &results, const std::string &filePath);
+
+    bool has_extension(const std::string& path, const std::string& ext);
 }

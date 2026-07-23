@@ -272,6 +272,7 @@ void utils::evaluate_metrics(const std::string &srcDir)
     fs::create_directories("output/BMP");
     fs::create_directories("output/PNG");
     fs::create_directories("output/JPG");
+    fs::create_directories("output/POL");
 
     for (const auto &i : fs::directory_iterator(srcDir))
     {
@@ -289,7 +290,15 @@ void utils::evaluate_metrics(const std::string &srcDir)
             outName = "output/JPG/" + i.path().stem().string() + "_q" + std::to_string(quality);
             results.emplace_back(run_case(img, outName, Format::JPG, quality,".jpg", ogSize, "JPG"));
         }
+
+        outName = "output/POL/" + i.path().stem().string();
+        results.emplace_back(run_case(img, outName, Format::POL, std::nullopt,".pol", ogSize, "POL"));
     }
 
     generate_csv(results, "output/results.csv");
+}
+
+bool utils::has_extension(const std::string& path, const std::string& ext)
+{
+    return path.size() >= ext.size() && path.compare(path.size() - ext.size(), ext.size(), ext) == 0;
 }
