@@ -79,27 +79,47 @@ void HuffmanCanon::encode(const std::vector<byte_t> &data)
     m_tree.clear();
 }
 
+std::unique_ptr<DecodeNode> HuffmanCanon::build_decode_tree(const std::unordered_map<byte_t, std::string> &codes) const
+{
+    auto root = std::make_unique<DecodeNode>();
+
+    for (const auto &x : codes)
+    {
+        DecodeNode *curr = root.get();
+
+        for (const auto &bit : x.second)
+        {
+            auto &next = (bit == '0') ? curr->left : curr->right;
+
+            if (!next) next = std::make_unique<DecodeNode>();
+            curr = next.get();
+        }
+
+        curr->isLeaf = true;
+        curr->ch = x.first;
+    }
+
+    return root;
+}
+
 std::string HuffmanCanon::decode() const
 {
     if (m_codes.empty()) return "";
 
-    std::unordered_map<std::string, byte_t> codeTochar;
-
-    for (const auto &x : m_codes)
-        codeTochar[x.second] = x.first;
+    auto root = build_decode_tree(m_codes);
 
     std::string res;
-    std::string buffer;
+
+    const DecodeNode *curr = root.get();
 
     for (const auto bit : m_encodedData)
     {
-        buffer += bit;
-        auto i = codeTochar.find(buffer);
+        curr = (bit == '0') ? curr->left.get() : curr->right.get();
 
-        if (i != codeTochar.end())
+        if (curr->isLeaf)
         {
-            res += i->second;
-            buffer.clear();
+            res += static_cast<char>(curr->ch);
+            curr = root.get();
         }
     }
 

@@ -33,7 +33,13 @@ struct comparator
         return left->freq > right->freq;
     }
 };
-
+struct DecodeNode
+{
+    byte_t ch;
+    bool isLeaf = false;
+    std::unique_ptr<DecodeNode> left;
+    std::unique_ptr<DecodeNode> right;
+};
 class HuffmanCanon
 {
 private:
@@ -47,6 +53,8 @@ private:
     void get_canon_codes();
 
     void encode(const std::vector<byte_t> &data);
+
+    std::unique_ptr<DecodeNode> build_decode_tree(const std::unordered_map<byte_t, std::string> &codes) const;
     
     HuffmanCanon() {};
     HuffmanCanon(const std::vector<byte_t> &data);
