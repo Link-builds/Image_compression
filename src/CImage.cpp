@@ -38,7 +38,7 @@ void Image::print_info() const
     std::cout << m_dataPath << ": " << m_width << 'x' << m_height << " (ch: " << m_numChannel << ')' << '\n'; 
 }
 
-void Image::save_as(const std::string &outName, Format format, std::optional<int> quality) const
+void Image::save_as(const std::string &outName, Format format, std::optional<int> optional) const
 {
     if (format == Format::PNG)
     {
@@ -48,9 +48,9 @@ void Image::save_as(const std::string &outName, Format format, std::optional<int
     {
         int q;
         
-        if (quality.has_value())
+        if (optional.has_value())
         {
-            q = quality.value();
+            q = optional.value();
         }
         else
         {
@@ -73,6 +73,6 @@ void Image::save_as(const std::string &outName, Format format, std::optional<int
     else if (format == Format::POL)
     {
         CustomEncoder enc(*this);
-        enc.encode_and_save(outName + ".pol");
+        enc.encode_and_save(outName + ".pol", optional.value_or(8));
     }
 }

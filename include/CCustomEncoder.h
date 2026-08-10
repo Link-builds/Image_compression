@@ -6,9 +6,6 @@
 #include "CHuffmanCanon.h"
 #include "filters.h"
 #include "CImage.h"
-
-constexpr int BLOCK_SIZE = 8;
-
 class CustomEncoder
 {
 private:
@@ -29,5 +26,5 @@ public:
 
     ~CustomEncoder() {};
 
-    void encode_and_save(const std::string &outName);
+    void encode_and_save(const std::string &outName, int blockSize);
 };

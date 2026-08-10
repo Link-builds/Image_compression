@@ -291,8 +291,11 @@ void utils::evaluate_metrics(const std::string &srcDir)
             results.emplace_back(run_case(img, outName, Format::JPG, quality,".jpg", ogSize, "JPG"));
         }
 
-        outName = "output/POL/" + i.path().stem().string();
-        results.emplace_back(run_case(img, outName, Format::POL, std::nullopt,".pol", ogSize, "POL"));
+        for (int blockSize : {2, 4, 8, 16, 32}) // write to quality in csv
+        {
+            outName = "output/POL/" + i.path().stem().string() + "_b" + std::to_string(blockSize);
+            results.emplace_back(run_case(img, outName, Format::POL, blockSize,".pol", ogSize, "POL"));
+        }
     }
 
     generate_csv(results, "output/results.csv");
